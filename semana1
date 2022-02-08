@@ -1,0 +1,25 @@
+//https://www.hackerrank.com/domains/sql
+
+use testes;
+
+create table city (id integer primary 
+key AUTO_INCREMENT,
+name varchar(17),
+countrycode varchar(3),
+district varchar(20),
+population integer);
+
+INSERT INTO CITY (name, countrycode,
+district,population) VALUES
+('guarulhos', 'BRA','SÃO PAULO', 1400000),
+('Los Angeles', 'USA','Califórnia', 4000000);
+INSERT INTO CITY (name, countrycode,
+district,population) VALUES
+('Scranton', 'USA','Pensilvânia', 78000);
+
+select * from CITY;
+delete from city where id = 2;
+select * from city where population 
+> 100000 and countrycode = 'USA' ;
+
+
