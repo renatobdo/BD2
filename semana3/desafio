@@ -1,4 +1,4 @@
-Dado as tabelas abaixo como eu poderia efetuar a consulta dos clientes (customers) que não efetuaram pedidos (orders) utilizando o LEFT JOIN ?
+## Dado as tabelas abaixo como eu poderia efetuar a consulta dos clientes (customers) que não efetuaram pedidos (orders) utilizando o LEFT JOIN ?
 
 CREATE TABLE customers (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
