@@ -1,3 +1,5 @@
+## https://www.devmedia.com.br/mysql-basico-triggers/37462
+
 CREATE TABLE Produtos
 (
 	Referencia	VARCHAR(3) PRIMARY KEY,
