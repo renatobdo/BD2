@@ -1,0 +1,17 @@
+###### Crie as duas tabelas a seguir
+
+CREATE TABLE membros ( id INT AUTO_INCREMENT, 
+nome VARCHAR(100) NOT NULL, 
+email VARCHAR(255), 
+dataNascimento DATE, 
+PRIMARY KEY (id));
+
+CREATE TABLE lembrete ( id INT AUTO_INCREMENT, 
+membroId INT, 
+mensagem VARCHAR(255) NOT NULL, 
+PRIMARY KEY (id ,membroId));
+
+#### Crie uma trigger que será acionada quando é inserido um valor na coluna dataNascimento cuja data de
+aniversário é igual a data de hoje na coluna dataNascimento . Ela deverá mostrar a seguinte
+mensagem:
+“Olá, nome_do_Membro , feliz aniversário e muitos anos de vida”
