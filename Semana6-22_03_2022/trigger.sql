@@ -54,6 +54,8 @@ DROP TRIGGER Tgr_ItensVenda_Insert
 
 ###################################################################
 ##		 MAIS EXEMPLOS DE TRIGGERS 			 ##
+## retirados de https://www.mysqltutorial.org/mysql-triggers/mysql after insert trigger/
+#
 ###################################################################
 
 #################################################################
