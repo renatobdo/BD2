@@ -39,17 +39,24 @@ END$
 
 DELIMITER ;
 
-
+################ Testando a trigger AFTER INSERT #######################
 INSERT INTO ItensVenda VALUES (1, '001',3);
+select * from produtos;
+
 INSERT INTO ItensVenda VALUES (1, '002',1);
+select * from produtos;
+
 INSERT INTO ItensVenda VALUES (1, '003',5);
+select * from produtos;
 
-
+################ Testando a trigger AFTER DELETE ########################
 DELETE FROM ItensVenda WHERE Venda = 1 AND Produto = '001';
+select * from produtos;
 
+######## mostra todas as triggers ###############################
 SHOW TRIGGERS
 
-
+###### apaga a trigger criada #########################################
 DROP TRIGGER Tgr_ItensVenda_Insert
 
 ###################################################################
