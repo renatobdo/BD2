@@ -1,3 +1,4 @@
+## Deem uma olhada nos slides 39 a 42 (da semana6-moodle) que pode ser útil
 ###### Crie as duas tabelas a seguir
 
 CREATE TABLE membros ( id INT AUTO_INCREMENT, 
