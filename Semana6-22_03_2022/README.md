@@ -8,7 +8,7 @@ Primeiro importe o arquivo survey.csv conforme mostrei em aula
 
 Depois importe os arquivos order_items.csv e por último os arquivos order_items_refund.csv
 
-Por enquanto não iremos utilizar o arquivo web_sessions.csv
+Por enquanto não iremos utilizar o arquivo website_pageviews.csv
 
 Iremos utilizar esses dados para próximas aulas
 
