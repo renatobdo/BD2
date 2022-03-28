@@ -104,3 +104,23 @@ WHERE
 SELECT * FROM PriceLogs;
 SELECT * FROM UserChangeLogs;
 
+#####################################
+# Informações da ordem de execução das triggers
+########################################
+
+SHOW TRIGGERS 
+FROM classicmodels
+WHERE `table` = 'products';
+
+#######################
+SELECT 
+    trigger_name, 
+    action_order
+FROM
+    information_schema.triggers
+WHERE
+    trigger_schema = 'classicmodels'
+ORDER BY 
+    event_object_table , 
+    action_timing , 
+    event_manipulation;
