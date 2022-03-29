@@ -1,5 +1,10 @@
 ## https://www.mysqltutorial.org/mysql-triggers/create-multiple-triggers-for-the-same-trigger-event-and-action-time/
 
+create table products (id int primary key,
+quantityInStock int,
+msrp int, 
+productCode varchar(30));
+
 CREATE TABLE PriceLogs (
     id INT AUTO_INCREMENT,
     productCode VARCHAR(15) NOT NULL,
