@@ -5,6 +5,15 @@ quantityInStock int,
 msrp int, 
 productCode varchar(30));
 
+
+### msrp = preço sugerido pelo fabricante
+insert into products values (1, 1, 2, 'S12_1090');
+insert into products values (2, 2, 30, 'S12_1091');
+insert into products values (3, 3, 40, 'S12_1092');
+insert into products values (4, 4, 50, 'S12_1093');
+insert into products values (5, 5, 100, 'S12_1099');
+
+
 CREATE TABLE PriceLogs (
     id INT AUTO_INCREMENT,
     productCode VARCHAR(15) NOT NULL,
