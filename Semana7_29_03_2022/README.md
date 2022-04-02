@@ -1,4 +1,4 @@
-## Cópia de backup porque deu erro ao alterar a tabela 
+## Cópia de backup porque deu erro ao alterar a tabela via WorkBench
 
 create table order_items_backup(
 	order_item_id BIGINT,
