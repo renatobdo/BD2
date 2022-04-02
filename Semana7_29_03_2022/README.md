@@ -13,13 +13,13 @@ create table order_items_backup(
 		products(product_id)
 );
 
-# Alterando a tabela
+## Alterando a tabela
 alter table order_items_backup add product_id int;
 
 
 alter table order_items_backup add is_primary_item int;
 
-# Fazendo a cópia na tabela de backup
+## Fazendo a cópia na tabela de backup
 
 insert into order_items_backup (
 order_item_id, created_at, 
@@ -29,10 +29,10 @@ website_session_id, product_id, is_primary_item
 
 select * from order_items;
 
-# Dropando a tabela para depois recriá-la
+## Dropando a tabela para depois recriá-la
 drop table order_items;
 
-# Recriando a tabela
+## Recriando a tabela
 create table order_items(
 	order_item_id BIGINT,
     created_at DATETIME,
@@ -52,7 +52,7 @@ alter table order_items add product_id int;
 
 alter table order_items add is_primary_item int;
 
-# Copiando de volta para a tabela
+## Copiando de volta para a tabela
 insert into order_items (
 order_item_id, created_at, 
 order_id, price_usd, cogs_usd, 
