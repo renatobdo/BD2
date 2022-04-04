@@ -1,6 +1,8 @@
 ###################################################
 ################ views ##########################
-##
+##C:\Users\renat\OneDrive\Área de Trabalho\Renato\DisciplinasProfessorIFSPGuarulhos\BD2\8\Semana8.sql
+#
+#
 #### Exercício - 1
 Create table martian_confidential
 (martian_id int,
