@@ -50,13 +50,13 @@ insert into base values
 (4,'New New New York', '2042-02-10'),
 (5,'Olympus Mons Spa & Casino', null);
 
-create table inventory (base_id integer primary key,
-supply_id integer primary key,
+create table inventory (inventory_id integer primary key auto_increment, base_id integer,
+supply_id integer,
 quantity integer,
 foreign key(base_id) references base(base_id),
 foreign key(supply_id) references supply(supply_id));
 
-insert into inventory values(1, 1, 8),
+insert into inventory(base_id, supply_id, quantity) values(1, 1, 8),
 (1,3,5),
 (1,5,1),
 (1,6,2),
