@@ -42,7 +42,7 @@ alter table visitor add primary key (visitor_id);
 Create table base (base_id integer,
 base_name varchar(50), 
 founded date);
-
+alter table base add primary key (base_id);
 insert into base values
 (1,'tharsisland', '2037-06-03'),
 (2,'Valles Marineris 2.0', '2040-12-01'),
