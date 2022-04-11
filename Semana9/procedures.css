@@ -1,0 +1,15 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 11 de abr de 2022, 19:15:58
+    Author     : renat
+*/
+
+.input-group-addon {
+     min-width:50px;
+    width:20%;
+
+    text-align:left;
+}
