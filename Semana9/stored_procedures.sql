@@ -43,3 +43,54 @@ BEGIN
 	END IF;
 END//
 call test2();
+
+#################Procedimentos armazenados que utilizam CASE #####################################
+DELIMITER //
+CREATE PROCEDURE test3()
+BEGIN
+    DECLARE terms_id_var INT;
+    SELECT terms_id INTO terms_id_var
+    FROM invoices WHERE invoice_id = 4;
+    CASE terms_id_var
+        WHEN 1 THEN
+            SELECT 'Net due 10 days' AS Terms;
+        WHEN 2 THEN
+            SELECT 'Net due 20 days' AS Terms;
+        WHEN 3 THEN
+        -- Líquido devido 30 dias
+            SELECT 'Net due 30 days' AS Terms;
+        ELSE
+            SELECT 'Net due more tha.n 3 0 days ' AS Terms;
+    END CASE;
+END//
+call test3();
+####################### Procedimentos que utilizam WHILE loop ####################################
+
+DELIMITER //
+CREATE PROCEDURE test4( )
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    DECLARE s VARCHAR(400) DEFAULT '';
+    WHILE i < 4 DO
+        SET s = CONCAT(s, 'i=',i, ' | ');
+        SET i = i + 1;
+    END WHILE;
+    SELECT s AS message;
+END//
+call test4();
+############ outras possiblidade de se utilizar o LOOP #############################################
+-- A REPEAT loop
+    REPEAT        
+        SET s = CONCAT ( s, 'i= ', i, ' | ' ) ;
+        SET i = i + 1;
+    UNTIL i = 4;
+    END REPEAT;
+
+-- A simple loop
+    testLoop: LOOP
+        SET s = CONCAT(s, 'i=', i, ' | ');
+        SET i = i + 1;
+        IF i = 4 THEN
+            LEAVE testLoop;
+        END IF;
+    END LOOP testLoop;  
