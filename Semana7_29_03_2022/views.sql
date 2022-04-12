@@ -22,6 +22,16 @@ insert into martian_confidential values
 
 select * from martian_confidential;
 
+### Resposta###
+select martian_id, first_name, last_name, base_id, super_id
+from martian_confidential;
+
+create view martian_public as 
+select martian_id, first_name, last_name, base_id, super_id
+from martian_confidential;
+
+select * from martian_public;
+
 ######## Exercício - 2 e 3
 #### Criação da tabela visitor ###############
 create table visitor(visitor_id integer,
@@ -35,6 +45,28 @@ insert into visitor values (1, 1,'George', 'Ambrose'),
 (4, 4,'Jane', 'Thorton');
 
 alter table visitor add primary key (visitor_id); 
+
+
+##### Resposta 1 #####
+#### Reparem que o select está sendo realizado na view martian_public
+####
+select martian_id, first_name, last_name, 'Martian' as status
+from martian_public
+	union
+select visitor_id, first_name, last_name, 'visitor' as status
+from visitor;
+
+##### Reposta 2 ############
+#### Temos martian e visitor com mesmo id na tabela, por isso podemos usar o concat para
+#### diferenciá-los
+######## CONCAT ################
+select CONCAT('m', martian_id) AS id, first_name, last_name, 
+	'Martian' as status
+from martian_public
+	UNION
+select CONCAT('v', visitor_id) AS id, first_name, last_name, 
+	'visitor' as status
+from visitor;
 
 ############################################
 ### Exercício - 4
