@@ -22,7 +22,7 @@ insert into martian_confidential values
 
 select * from martian_confidential;
 
-### Resposta###
+### Resposta do exercício 1 ###
 select martian_id, first_name, last_name, base_id, super_id
 from martian_confidential;
 
@@ -47,7 +47,7 @@ insert into visitor values (1, 1,'George', 'Ambrose'),
 alter table visitor add primary key (visitor_id); 
 
 
-##### Resposta 1 #####
+##### Resposta do exercício 3 #####
 #### Reparem que o select está sendo realizado na view martian_public
 ####
 select martian_id, first_name, last_name, 'Martian' as status
@@ -56,10 +56,7 @@ from martian_public
 select visitor_id, first_name, last_name, 'visitor' as status
 from visitor;
 
-##### Reposta 2 ############
-#### Temos martian e visitor com mesmo id na tabela, por isso podemos usar o concat para
-#### diferenciá-los
-######## CONCAT ################
+######## Execute o select abaixo e veja o resultado
 select CONCAT('m', martian_id) AS id, first_name, last_name, 
 	'Martian' as status
 from martian_public
@@ -67,6 +64,19 @@ from martian_public
 select CONCAT('v', visitor_id) AS id, first_name, last_name, 
 	'visitor' as status
 from visitor;
+#####################
+# Criação da view people_on_mars
+#####################
+CREATE VIEW people_on_mars AS
+select CONCAT('m', martian_id) AS id, first_name, last_name, 
+	'Martian' as status
+from martian_public
+	UNION
+select CONCAT('v', visitor_id) AS id, first_name, last_name, 
+	'visitor' as status
+from visitor;
+
+
 
 ############################################
 ### Exercício - 4
