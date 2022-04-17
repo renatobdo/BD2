@@ -16,6 +16,7 @@ CREATE PROCEDURE InsertSupplierProduct(
 )
 BEGIN
     -- exit if the duplicate key occurs
+    -- troque o EXIT pelo CONTINUE e veja a diferença
     DECLARE EXIT HANDLER FOR 1062
     BEGIN
  	SELECT CONCAT('Duplicate key (',inSupplierId,',',inProductId,') occurred') AS message;
@@ -33,3 +34,10 @@ BEGIN
 END$$
 
 DELIMITER ;
+#
+# Testando
+#
+CALL InsertSupplierProduct(1,1);
+CALL InsertSupplierProduct(1,2);
+CALL InsertSupplierProduct(1,3);
+CALL InsertSupplierProduct(1,3);
