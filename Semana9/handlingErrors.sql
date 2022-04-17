@@ -60,7 +60,7 @@ DELIMITER ;
 call TestProc();
 #
 ########################################
-# Levantando erros
+# Levantando erros https://www.mysqltutorial.org/mysql-signal-resignal/
 ########################################
 DELIMITER $$
 
@@ -85,5 +85,5 @@ BEGIN
 	-- more code below
 	-- ...
 END$$
-### https://www.mysqltutorial.org/mysql-signal-resignal/
+### 
 CALL AddOrderItem(10,'S10_1678',1,95.7,1);
