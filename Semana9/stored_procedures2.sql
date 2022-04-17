@@ -60,3 +60,38 @@ DELIMITER ;
 #
 CALL GetCustomerShipping(112,@shipping);
 SELECT @shipping;
+#
+##
+####################################################################
+# Procedimento armazenado 2 que utiliza CASE
+####################################################################
+
+DELIMITER $$
+CREATE PROCEDURE GetDeliveryStatus(
+	IN pOrderNumber INT,
+    OUT pDeliveryStatus VARCHAR(100)
+)
+BEGIN
+	DECLARE waitingDay INT DEFAULT 0;
+    SELECT 
+		DATEDIFF(requiredDate, shippedDate)
+	INTO waitingDay
+	FROM orders
+    WHERE orderNumber = pOrderNumber;
+    
+    CASE 
+		WHEN waitingDay = 0 THEN 
+			SET pDeliveryStatus = 'On Time';
+        WHEN waitingDay >= 1 AND waitingDay < 5 THEN
+			SET pDeliveryStatus = 'Late';
+		WHEN waitingDay >= 5 THEN
+			SET pDeliveryStatus = 'Very Late';
+		ELSE
+			SET pDeliveryStatus = 'No Information';
+	END CASE;	
+END$$
+DELIMITER ;
+#
+CALL GetDeliveryStatus(10100,@delivery);
+select @delivery as 'status da entrega';
+#
