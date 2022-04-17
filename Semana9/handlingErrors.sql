@@ -10,6 +10,7 @@ CREATE TABLE SupplierProducts (
 ###
 # Criando a procedure que irá tratar o erro
 ###
+DELIMITER $$
 CREATE PROCEDURE InsertSupplierProduct(
     IN inSupplierId INT, 
     IN inProductId INT
