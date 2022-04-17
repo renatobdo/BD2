@@ -1,4 +1,5 @@
 ##
+# https://www.mysqltutorial.org/mysql-error-handling-in-stored-procedures/
 # Criação da tabela
 ##
 CREATE TABLE SupplierProducts (
