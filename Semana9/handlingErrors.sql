@@ -42,3 +42,19 @@ CALL InsertSupplierProduct(1,1);
 CALL InsertSupplierProduct(1,2);
 CALL InsertSupplierProduct(1,3);
 CALL InsertSupplierProduct(1,3);
+#
+##########################
+# Erros customizados
+################################
+DROP PROCEDURE IF EXISTS TestProc;
+DELIMITER $$
+CREATE PROCEDURE TestProc()
+BEGIN
+    DECLARE TableNotFound CONDITION for 1146 ; 
+    DECLARE EXIT HANDLER FOR TableNotFound 
+	SELECT 'Please create table abc first' Message; 
+    SELECT * FROM abc;
+END$$
+DELIMITER ;
+#
+call TestProc();
