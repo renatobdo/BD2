@@ -98,6 +98,7 @@ select @delivery as 'status da entrega';
 #
 ####################
 # Procedimento armazenado que retorna múltiplos valores
+#https://www.mysqltutorial.org/mysql-stored-procedures-return-multiple-values/
 #####################
 DELIMITER $$
 
