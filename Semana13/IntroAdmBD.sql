@@ -2,7 +2,7 @@
 
 ## Trabalhando com eventos agendados (Working with MySQL Scheduled Event)
 #### https://www.mysqltutorial.org/mysql-triggers/working-mysql-scheduled-event/ ##################
-#
+# https://dev.mysql.com/doc/refman/8.0/en/create-event.html
 #
 #
 # Criando um exemplo de evento único
