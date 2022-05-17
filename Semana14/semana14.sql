@@ -309,3 +309,43 @@ DROP ROLE [IF EXISTS] rolel [, role2] ...
 
 A statement that deletes the new role
 DROP ROLE invoice_entry
+
+###########
+# Script de criação/definição de ROLES
+##################################
+A script that sets up the users and roles for a database
+-- create the users
+CREATE USER IF NOT EXISTS john IDENTIFIED BY 'sesame';
+CREATE USER IF NOT EXISTS jane IDENTIFIED BY 'sesame';
+CREATE USER IFA script that sets up the users and roles for a database
+-- create the users
+CREATE USER IF NOT EXISTS john IDENTIFIED BY 'sesame';
+CREATE USER IF NOT EXISTS jane IDENTIFIED BY 'sesame';
+CREATE USER IF NOT EXISTS jim IDENTIFIED BY 'sesame';
+CREATE USER IF NOT EXISTS joel@localhost IDENTIFIED BY 'sesame';
+
+-- create the roles
+CREATE ROLE IF NOT EXISTS developer, manager, user;
+
+-- grant privileges to the developer role
+GRANT ALL ON *.* TO developer WITH GRANT OPTION;
+
+-- grant privileges to the manager role
+GRANT SELECT, INSERT, UPDATE, DELETE ON ap.* TO manager WITH GRANT OPTION;
+
+-- grant privileges to user role
+GRANT SELECT, INSERT, UPDATE, DELETE ON ap.vendors TO user;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ap.invoices TO user;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ap.invoice_line_items TO user;
+GRANT SELECT ON ap.general_ledger_accounts TO user;
+GRANT SELECT ON ap.terms TO user;
+
+-- assign users to roles
+GRANT developer TO joel@localhost;
+GRANT manager TO jim;
+GRANT user TO john, jane;
+
+-- set default roles for users
+SET DEFAULT ROLE developer TO joel@localhost;
+SET DEFAULT ROLE manager TO jim;
+SET DEFAULT ROLE user TO john, jane;
