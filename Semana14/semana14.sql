@@ -3,7 +3,7 @@
 ##########################
 #Um script que cria 1 usuário e garante permissões a ele:
 ########################
-CREATE USER 'admin02'@'localhost' IDENTIFIED BY 'admin02’;
+CREATE USER 'admin02'@'localhost' IDENTIFIED BY 'admin02';
 
 GRANT ALL PRIVILEGES
 ON *.*
