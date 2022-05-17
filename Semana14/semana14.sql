@@ -126,3 +126,22 @@ GRANT USAGE
 ON*.*
 TO anne@localhost
 WITH GRANT OPTION
+
+#
+#A statement that displays a list of users
+#SELECT User, Host FROM mysql.user
+
+A statement that displays a list of users
+SELECT User, Host FROM mysql.user
+
+The syntax of the SHOW GRANTS statement
+SHOW GRANTS [FOR user]
+
+A statement that shows the privileges for a user from any host
+SHOW GRANTS FOR jim
+
+A statement that shows the privileges for a user from a specific host
+SHOW GRANTS FOR ap_user@localhost
+
+A statement that shows the privileges for the current user
+SHOW GRANTS
