@@ -1,17 +1,27 @@
 ###
 # Criação de usuário
-#####
+##########################
+#Um script que cria 1 usuário e garante permissões a ele:
+########################
+CREATE USER 'admin02'@'localhost' IDENTIFIED BY 'admin02’;
 
-CREATE USER ap_ admin@loc alhost IDENTIFIED BY 'password';
-CREATE USER ap_user@localhost IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES
+ON *.*
+TO 'admin02'@'localhost' WITH GRANT OPTION;
+
+#######################
+#Um script que cria 2 usuários e garante permissões a eles:
+#######################
+CREATE USER 'ap_admin'@'localhost' IDENTIFIED BY 'password';
+CREATE USER 'ap_user'@'localhost' IDENTIFIED BY 'password';
 
 GRANT ALL
 ON ap.*
-TO ap_ admin@localhost;
+TO 'ap_ admin'@'localhost';
 
 GRANT SELECT, INSERT, UPDATE, DELETE
 ON ap.*
-TO ap_user@localhost;
+TO 'ap_user'@'localhost';
 
 show grants for ap_admin@localhost;
 show privileges;
@@ -30,13 +40,13 @@ PASSWORD HISTORY {DEFAULT lnwnber_passwords} I
 PASSWORD REUSE INTERVAL {DEFAULT ldays DAY}]
 
 #A statement that creates a user from a specific host
-CREATE USER joel@localhost IDENTIFIED BY 'sesame'
+CREATE USER 'joel'@'localhost' IDENTIFIED BY 'sesame'
 #
 #A statement that creates a user from any host
 CREATE USER IF NOT EXISTS jane IDENTIFIED BY 'sesame' -- creates jane@%
 
 #A statement that creates a user whose password expires immediately
-CREATE USER anne@localhost PASSWORD EXPIRE
+CREATE USER 'anne'@'localhost' PASSWORD EXPIRE
 
 #A statement that creates a user whose last five passwords can't be reused
 CREATE USER jim IDENTIFIED BY 'sesame' PASSWORD HISTORY 5
@@ -49,14 +59,14 @@ CREATE USER john IDENTIFIED BY 'sesame' PASSWORD REUSE INTERVAL 365 DAY
 RENAME USER username TO new username
 
 #A statement that renames a user from a specific host
-RENAME USER joel@localhost TO joelmurach@localhost
+RENAME USER 'joel'@'localhost' TO 'joelmurach'@'localhost'
 
 #How to drop a user
 #The syntax of the DROP USER statement
 DROP USER [IF EXISTS] username
 
 #A statement that drops a user from a specific host
-DROP USER joelmurach@localhost
+DROP USER 'joelmurach'@'localhost'
 
 #A statement that drops a user from any host
 DROP USER IF EXISTS jane
