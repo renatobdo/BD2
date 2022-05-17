@@ -86,3 +86,43 @@ john@'%.murach.com'
 
 A username that needs to be coded with quotes
 'quinn-the-mighty'@'%.murach.com'
+
+###
+#The syntax of the GRANT statement
+GRANT privilege_ list
+ON [db_name.] table
+TO userl [, user2 ] ...
+[WITH GRANT OPTION]
+
+#A statement that grants global privileges to a user
+GRANT ALL
+ON *.*
+TO jim
+WITH GRANT OPTION
+
+#A statement that grants database privileges to a user
+GRANT SELECT, INSERT, UPDATE
+ON ap.*
+TO joel@localhost
+
+#A statement that grants table privileges to a user
+GRANT SELECT, INSERT, UPDATE
+ON ap.vendors
+TO joel@localhost
+
+#A statement that grants column privileges to a user
+GRANT SELECT (vendor_ name, vendor_ state, vendor_ zip_ code),
+UPDATE (vendor_addressl)
+ON ap.vendors
+TO joel@localhost
+
+#A statement that uses the current database
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON vendors
+TO ap_user@localhost
+
+#A statement that gives a user the ability to grant privileges to other users
+GRANT USAGE
+ON*.*
+TO anne@localhost
+WITH GRANT OPTION
