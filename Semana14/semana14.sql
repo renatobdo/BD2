@@ -62,3 +62,27 @@ DROP USER joelmurach@localhost
 DROP USER IF EXISTS jane
 -- drops jane@%
 
+#
+The syntax of an account name
+username[@hostname]
+
+A user that can only connect from the same server as MySQL
+john@loca1host
+
+The same user with optional quotation marks
+'john'@'localhost'
+
+The same user with an IP address instead of the localhost keyword
+john@127.0.0.1
+
+A user that can connect from any computer
+john
+
+The same user but with the wildcard character explicitly coded
+john@'% '
+
+A user that can only connect from the murach.com domain
+john@'%.murach.com'
+
+A username that needs to be coded with quotes
+'quinn-the-mighty'@'%.murach.com'
