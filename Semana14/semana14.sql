@@ -35,9 +35,9 @@ select * from mysql.columns_priv;
 #How to create a user
 #The syntax of the CREATE USER statement
 CREATE USER [IF NOT EXISTS] username [IDENTIFIED BY password]
-[PASSWORD EXPIRE [DEFAULT INEVER IINTERVAL days DAY] I
-PASSWORD HISTORY {DEFAULT lnwnber_passwords} I
-PASSWORD REUSE INTERVAL {DEFAULT ldays DAY}]
+[PASSWORD EXPIRE [DEFAULT |NEVER |INTERVAL days DAY] |
+PASSWORD HISTORY {DEFAULT |number_passwords} |
+PASSWORD REUSE INTERVAL {DEFAULT |days DAY}]
 
 #A statement that creates a user from a specific host
 CREATE USER 'joel'@'localhost' IDENTIFIED BY 'sesame'
@@ -184,7 +184,7 @@ How to use the ALTER USER statement
 The syntax
 ALTER USER [IF EXISTS] {username |USER()} [IDENTIFIED BY 'password']
 [PASSWORD EXPIRE [DEFAULT |NEVER |INTERVAL days DAY] |
-PASSWORD HISTORY {DEFAULT | number_passwords} I
+PASSWORD HISTORY {DEFAULT | number_passwords} |
 PASSWORD REUSE INTERVAL {DEFAULT |days DAY}]
 
 A statement that changes a user's password
