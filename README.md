@@ -19,4 +19,7 @@ https://www3.ntu.edu.sg/home/ehchua/programming/sql/SampleDatabases.html#zz-3.
 www.hackerrank.com
 
 
+## Grupo de whatsApp
+https://chat.whatsapp.com/GNGOs1MflakGfDVUvXjYvG
+
 
