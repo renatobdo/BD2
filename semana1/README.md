@@ -4,3 +4,11 @@
 
 Referência: https://www.mysqltutorial.org/mysql-sample-database.aspx
 
+ordem de criação e inserts:
+offices
+productlines
+employees
+products
+customers
+orders
+orderdetails
