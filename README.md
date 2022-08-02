@@ -5,7 +5,8 @@ Disciplina de banco de dados 2 do IFSP câmpus Guarulhos. Aqui você encontra ma
 # Plano de aulas
 2022-02
 
-https://docs.google.com/spreadsheets/d/1-tYzOWns5SfTSG9tlqasl9uZNgrBo5aTuTelx1V6t4o/edit?usp=sharing
+Turma 1 (quinta-feira) https://docs.google.com/spreadsheets/d/1-tYzOWns5SfTSG9tlqasl9uZNgrBo5aTuTelx1V6t4o/edit?usp=sharing
+Turma 2 (Terça-feira) https://docs.google.com/spreadsheets/d/1M3mr7L1KMahwyQe7-QUAWealhq8-a59QEtEf0mLMKno/edit?usp=sharing
 
 ## Moodle
 Em breve
@@ -20,6 +21,7 @@ www.hackerrank.com
 
 
 ## Grupo de whatsApp
-https://chat.whatsapp.com/GNGOs1MflakGfDVUvXjYvG
+turma 1 (Quinta-feira) https://chat.whatsapp.com/GNGOs1MflakGfDVUvXjYvG 
+turma 2 (Terça-feira) https://chat.whatsapp.com/LiEkYEIGUIF1bRWThhD7Ht 
 
 
