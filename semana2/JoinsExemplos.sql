@@ -17,7 +17,7 @@ select first_name, last_name,
 
 ## Criação do banco de dados de testes;
 Create database testes;
-
+use testes;
 ## criação da tabela médicos
 create table doctors (doctor_id int primary key,
 doctor_name varchar(100));
