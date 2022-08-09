@@ -20,6 +20,7 @@ https://www3.ntu.edu.sg/home/ehchua/programming/sql/SampleDatabases.html#zz-3.
 ## Exercícios SQL
 www.hackerrank.com
 
+https://www.beecrowd.com.br/judge/en/login
 
 ## Grupo de whatsApp
 turma 1 (Quinta-feira) https://chat.whatsapp.com/GNGOs1MflakGfDVUvXjYvG 
