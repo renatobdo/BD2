@@ -73,4 +73,5 @@ select *
 	from doctors d1 RIGHT JOIN visits v1 
 		on d1.doctor_id = v1.doctor_id;
  
+ select * from visits;
  
