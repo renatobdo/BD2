@@ -46,6 +46,7 @@ insert into visits values (212, 'Jason Mallin','2013-10-12');
 select * from visits;
 
 
+## Essa consulta busca todos os médicos que fizeram atendimento ou não a um paciente
 select a.doctor_id, a.doctor_name, c.patient_name, c.vdate
 from doctors a 
 LEFT JOIN visits c
