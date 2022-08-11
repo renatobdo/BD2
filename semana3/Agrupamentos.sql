@@ -3,6 +3,8 @@ Employees
 ORDER BY    
 department_id;
 
+create database testes;
+use database testes;
 ## Tabela que será utilizada para os exemplos com GROUP BY
 CREATE TABLE inventory (
     warehouse VARCHAR(255),
