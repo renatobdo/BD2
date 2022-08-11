@@ -1,5 +1,5 @@
-create database hr2;
-use hr2;
+create database hr;
+use hr;
 CREATE TABLE regions (
 	region_id INT (11) AUTO_INCREMENT PRIMARY KEY,
 	region_name VARCHAR (25) DEFAULT NULL
