@@ -3,7 +3,7 @@ Employees
 ORDER BY    
 department_id;
 
-## GROUPING SETS
+## Tabela que será utilizada para os exemplos com GROUP BY
 CREATE TABLE inventory (
     warehouse VARCHAR(255),
     product VARCHAR(255) NOT NULL,
@@ -36,3 +36,26 @@ SELECT
     *
 FROM
     inventory;
+
+SELECT    SUM(quantity) qty
+FROM    inventory;
+
+
+select * from inventory;
+alter table inventory add ano year;
+update inventory set ano = now() where model = '7' and model = 'X';
+update inventory set ano = now() where model = 'X';
+update inventory set ano = 2021 where model = '6s';
+update inventory set ano = 2021 where model = 'Galaxy S';
+update inventory set ano = 2022 where model = 'Note 8';
+select * from employees;
+select * from countries;
+
+select e.department_id, d.department_name as 'nome do departamento', count(employee_id) 
+as 'quantidade de funcionários'
+	FROM employees e inner join departments d
+		on e.department_id = d.department_id
+		GROUP BY (department_id);
+
+
+
