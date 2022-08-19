@@ -111,5 +111,86 @@ FROM
     GROUP BY department_id) department_salary;
 
 ### Utilizar o banco de dados projetos. Ver no git...
+#https://github.com/renatobdo/BD2/blob/main/semana4/projetosdb.sql    
     
-    
+select titulo, count(p.id) from comentario c 
+	inner join projetos p
+		on c.id_projeto = p.id
+group by titulo;
+
+# Subquery que retorna a quantidade de comentários
+#por projeto e a quantidade de likes por projeto
+# ALternativa à utilização do INNER JOIN
+select titulo, 
+	(select count(c.id_projeto) 
+    from comentario c
+	where c.id_projeto = p.id) as 'qtd comentarios',
+    (select count(lpp.id_projeto) 
+    from likes_por_projeto lpp
+	where lpp.id_projeto = p.id) as 'qtd likes'
+from projetos p 
+group by p.id;
+
+# Segundo tipo de subquery
+# Como parâmetro da cláusula where
+SELECT
+    P.id,
+    P.titulo
+FROM
+    projetos P
+WHERE
+    P.id IN
+    (
+        SELECT
+            C.id_projeto
+        FROM
+            comentario C
+        WHERE
+            P.id = C.id_projeto
+    );
+#
+SELECT
+    P.id,
+    P.titulo,
+    P.datap
+FROM
+    projetos P
+WHERE
+    EXISTS
+    (
+        SELECT
+            C.id_projeto
+        FROM
+            comentario C
+        WHERE
+            P.id = C.id_projeto
+    );
+
+
+SELECT
+    P.titulo,
+    P.datap
+FROM
+    projetos P
+WHERE
+    P.id = (SELECT
+      MAX(LP.id_projeto)
+    FROM
+      likes_por_projeto LP);
+	
+select * from likes_por_projeto;
+#Quantos likes cada projeto recebeu?
+SELECT
+     COUNT(LP.id_usuario) as 'likes', id_projeto
+     as nome_projeto
+    FROM
+      likes_por_projeto LP group by id_projeto 
+      order by likes DESC;
+
+
+
+
+
+
+
+
