@@ -112,11 +112,18 @@ FROM
 
 ### Utilizar o banco de dados projetos. Ver no git...
 #https://github.com/renatobdo/BD2/blob/main/semana4/projetosdb.sql    
-    
-select titulo, count(p.id) from comentario c 
-	inner join projetos p
-		on c.id_projeto = p.id
-group by titulo;
+
+
+#Essa consulta retornar o título do projeto e quantidade
+# de likes    
+select titulo, 
+	(select count(c.id_projeto) 
+    from comentario c
+	where c.id_projeto = p.id) as 'qtd comentarios'
+from projetos p 
+group by p.id;
+
+
 
 # Subquery que retorna a quantidade de comentários
 #por projeto e a quantidade de likes por projeto
@@ -133,21 +140,15 @@ group by p.id;
 
 # Segundo tipo de subquery
 # Como parâmetro da cláusula where
-SELECT
-    P.id,
-    P.titulo
-FROM
-    projetos P
+SELECT P.id,
+    P.titulo, datap
+FROM   projetos P
 WHERE
     P.id IN
-    (
-        SELECT
-            C.id_projeto
-        FROM
-            comentario C
+    (SELECT C.id_projeto
+        FROM comentario C
         WHERE
-            P.id = C.id_projeto
-    );
+            P.id = C.id_projeto);
 #
 SELECT
     P.id,
@@ -157,26 +158,52 @@ FROM
     projetos P
 WHERE
     EXISTS
-    (
-        SELECT
+    (SELECT
             C.id_projeto
         FROM
             comentario C
         WHERE
-            P.id = C.id_projeto
+            P.id = C.id_projeto 
     );
 
-
-SELECT
-    P.titulo,
-    P.datap
-FROM
-    projetos P
-WHERE
-    P.id = (SELECT
+# Essa consulta retorna o projeto mais recente cadastrado
+# no banco de dados
+SELECT P.titulo, P.datap
+FROM projetos P
+WHERE P.id = (SELECT
       MAX(LP.id_projeto)
     FROM
       likes_por_projeto LP);
+
+# Essa consulta retorna o projeto mais recente cadastrado
+# no banco de dados utilizando o ORDER BY
+SELECT P.titulo, P.datap, (select datalpp from 
+likes_por_projeto order by datalpp desc
+limit 1) as 'data_like'
+FROM projetos P
+WHERE P.id = (SELECT
+      LP.id_projeto
+    FROM
+      likes_por_projeto LP ORDER BY datalpp DESC limit 1);
+
+SELECT
+      LP.id_projeto
+    FROM
+      likes_por_projeto LP ORDER BY datalpp DESC limit 1;
+select * from projetos;
+SELECT
+      LP.id_projeto
+    FROM
+      likes_por_projeto LP ORDER BY datap DESC;
+
+alter table likes_por_projeto add datalpp datetime;
+select * from likes_por_projeto;
+select * from projetos;
+update  likes_por_projeto set datalpp = now()
+	where id_projeto = 3 and id_usuario =2;
+
+update  likes_por_projeto set datalpp = '2022-08-22 20:31:31'
+	where id_projeto = 2 and id_usuario =4;
 	
 select * from likes_por_projeto;
 #Quantos likes cada projeto recebeu?
