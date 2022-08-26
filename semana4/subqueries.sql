@@ -214,7 +214,17 @@ SELECT
       likes_por_projeto LP group by id_projeto 
       order by likes DESC;
 
-
+###
+SELECT F.titulo, F.Quantidade_Comentarios
+FROM (SELECT P.id, P.titulo,
+        (SELECT COUNT(C.id_projeto)
+        FROM comentarios C
+        WHERE C.id_projeto = P.id ) 
+             AS Quantidade_Comentarios
+FROM projetos P
+) as F
+WHERE
+    F.Quantidade_Comentarios > 2
 
 
 
