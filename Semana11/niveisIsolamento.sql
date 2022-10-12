@@ -1,3 +1,4 @@
+#Testes com repeatable-read. Executar o código abaixo na sessão 1
 set autocommit = 0;
 set foreign_key_checks=0;
 
