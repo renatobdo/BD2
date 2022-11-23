@@ -1,5 +1,7 @@
 
 CREATE TABLE foo (oldjson char(250));
+
+
 # O JSON foi incluído num campo do tipo VARCHAR. 
 # Fazendo isso o MySQL não vai entender que este campo é do tipo JSON
 INSERT INTO foo VALUES ('{"name":"Bond","first":"James","ID":"007"}');
@@ -24,7 +26,7 @@ SELECT * FROM bar;
 #importar o banco de dados world_x_v2.sql em
 #https://github.com/renatobdo/BD2/blob/main/Semana16/world_x_v2.sql
 
-
+select * from countryinfo;
 #Execute a consulta abaixo para entender o campo JSON que será usado nos próximos testes
 SELECT DOC FROM countryinfo WHERE _id = 'USA';
 #A função abaixo mostra o nome das propriedades existentes no campo JSON
@@ -32,7 +34,8 @@ SELECT JSON_KEYS(doc) FROM countryinfo WHERE _id = 'USA';
 #Podemos extrair o valor de uma propriedade do campo JSON:
 SELECT JSON_KEYS(doc, "$.geography") FROM countryinfo WHERE _id = 'USA';
 #Ou então um valor de uma propriedade dentro de outra propriedade
-SELECT JSON_EXTRACT(doc, "$.government.HeadOfState") FROM countryinfo WHERE _id = 'USA';
+SELECT JSON_EXTRACT(doc, "$.government.HeadOfState") 
+	FROM countryinfo WHERE _id = 'USA';
 #Execute o SQL abaixo para ver todas as propriedades do JSON
 SELECT JSON_EXTRACT(doc, "$.GNP") as GNP
   , JSON_EXTRACT(doc, "$.Code") as Code
@@ -106,7 +109,8 @@ SELECT JSON_SEARCH(Y, "ONE", "2293-3343"), Y FROM X;
 SELECT JSON_SEARCH(Y, "ALL", "2293-3343"), Y FROM X;
 
 
-#Veja o seguinte JSON que representa a entidade “Trabalha_em” na nossa empresa que implementa projetos:
+#Veja o seguinte JSON que representa a entidade “Trabalha_em” 
+#na nossa empresa que implementa projetos:
 /*
 {
   "Cpf_Funcionario": "111222333",
@@ -114,8 +118,50 @@ SELECT JSON_SEARCH(Y, "ALL", "2293-3343"), Y FROM X;
   "Horas": 30
 }
 Construa a consulta SQL para obter a média de horas trabalhadas 
-por projeto (Nome da tabela tb_object_trabalha_em e nome do campo JSONVALUE).
+por projeto (Nome da tabela tb_object_trabalha_em e 
+nome do campo JSONVALUE).
 
-SELECT JSON_EXTRACT(JSONVALUE, "$.Numero_Projeto"), AVG(JSON_EXTRACT(JSONVALUE, "$.Horas")) FROM tb_object_trabalha_em
+SELECT JSON_EXTRACT(JSONVALUE, "$.Numero_Projeto"), 
+AVG(JSON_EXTRACT(JSONVALUE, "$.Horas")) FROM tb_object_trabalha_em
 GROUP BY JSON_EXTRACT(JSONVALUE, "$.Numero_Projeto")
 */
+insert into x values("{''}");
+create table projetos (id int, nome varchar(100), horas double);
+insert into projetos values (1, "banco de dados 2", 40),
+(2, "banco de dados NoSQL", 20);
+select * from projetos;
+create table projetos_json(projetos JSON);
+select * from projetos_json;
+
+insert into projetos_json values('{"id":1,"nome":"Banco de dados 2", 
+"Horas": 40,
+ "id":2,"nome":"Banco de dados NoSQL", "Horas":20
+}');
+
+select * from projetos_json;
+
+insert into projetos_json values (
+'{
+   "Projetos":[
+      {
+         "id":1,
+         "nome":"Banco de dados 2",
+         "Horas":40
+      },
+      {
+         "id":2,
+         "nome":"Banco de dados NoSQL",
+         "Horas":20
+      },
+      {
+         "id":1,
+         "nome":"Banco de dados 2 com NoSQL",
+         "Horas":10
+      },
+   ]
+}');
+select * from projetos_json;     
+SELECT JSON_EXTRACT(projetos, "$.id"), 
+AVG(JSON_EXTRACT(projetos, "$.Horas")) FROM projetos_json
+GROUP BY JSON_EXTRACT(projetos, "$.id");
+delete from 
