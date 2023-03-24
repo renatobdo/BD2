@@ -1,39 +1,81 @@
-#referência: https://www.mysqltutorial.org/create-sql-updatable-views.aspx
--- create a new table named items
-CREATE TABLE items (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    price DECIMAL(11 , 2 ) NOT NULL
+#MySQL view and WITH CHECK OPTION example
+#https://www.mysqltutorial.org/mysql-view-with-check-option/ 
+CREATE OR REPLACE VIEW vps AS
+    SELECT 
+        employeeNumber,
+        lastname,
+        firstname,
+        jobtitle,
+        extension,
+        email,
+        officeCode,
+        reportsTo
+    FROM
+        employees
+    WHERE
+        jobTitle LIKE '%VP%';
+
+#consultando a view
+#Como a view vps é uma view simples ela é atualizável
+SELECT * FROM vps;
+
+#  Inserindo na tabela employees através da view vps
+INSERT INTO vps(
+    employeeNumber,
+    firstName,
+    lastName,
+    jobTitle,
+    extension,
+    email,
+    officeCode,
+    reportsTo
+) 
+VALUES(
+    1703,
+    'Lily',
+    'Bush',
+    'IT Manager',
+    'x9111',
+    'lilybush@classicmodelcars.com',
+    1,
+    1002
 );
 
--- insert data into the items table
-INSERT INTO items(name,price) 
-VALUES('Laptop',700.56),('Desktop',699.99),('iPad',700.50) ;
+# Ao realizarmos a consulta abaixo podemos ver o valor inserido na tabela employees pela view vps
+SELECT 
+   * 
+FROM 
+   employees
+ORDER BY 
+   employeeNumber DESC;
 
--- create a view based on items table
-CREATE VIEW LuxuryItems AS
+# Para não permitir isso utilizamos a cláusula WITH CHECK OPTION
+CREATE OR REPLACE VIEW vps AS
     SELECT 
-        *
+        employeeNumber,
+        lastName,
+        firstName,
+        jobTitle,
+        extension,
+        email,
+        officeCode,
+        reportsTo
     FROM
-        items
+        employees
     WHERE
-        price > 700;
--- query data from the LuxuryItems view
-SELECT 
-    *
-FROM
-    LuxuryItems;
-    
-DELETE FROM LuxuryItems 
-WHERE
-    id = 3;
+        jobTitle LIKE '%VP%' 
+WITH CHECK OPTION;
 
-SELECT 
-    *
-FROM
-    LuxuryItems;
-# depois desse último select perceberemos que a linha com id = 3 foi removida da tabela base
-SELECT 
-    *
-FROM
-    items;
+# Iremos inserir novamente na tabela employees pela view vps
+INSERT INTO vps(employeeNumber,firstname,lastname,jobtitle,extension,email,officeCode,reportsTo)
+VALUES(1704,'John','Smith','IT Staff','x9112','johnsmith@classicmodelcars.com',1,1703);
+
+# O seguinte erro irá ser mostrado
+#Error Code: 1369. CHECK OPTION failed 'classicmodels.vps'
+
+# Caso tentarmos inserir um registro que contenha VP no cargo iremos conseguir inserir na tabela employee pela view vps
+INSERT INTO vps(employeeNumber,firstname,lastname,jobtitle,extension,email,officeCode,reportsTo)
+VALUES(1704,'John','Smith','SVP Marketing','x9112','johnsmith@classicmodelcars.com',1,1076);
+
+# Ao consultarmos na view verificamos que o registro foi inserido pois contém VP no cargo
+SELECT * FROM vps;
