@@ -80,3 +80,23 @@ DELIMITER ;
 
 SELECT cpf, validar_cpf(cpf) AS cpf_valido
 FROM pessoa;
+
+drop function generate_password;
+DELIMITER $$
+CREATE FUNCTION generate_password(length INT) 
+RETURNS VARCHAR(52)
+BEGIN
+    DECLARE npassword VARCHAR(52) DEFAULT '';
+    DECLARE i INT DEFAULT 0;
+    DECLARE allowed_chars VARCHAR(52) DEFAULT 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    DECLARE allowed_len INT DEFAULT LENGTH(allowed_chars);
+    WHILE i < length DO
+        SET npassword = CONCAT(npassword, SUBSTRING(allowed_chars, FLOOR(RAND()*allowed_len)+1, 1));
+        SET i = i + 1;
+    END WHILE;
+    RETURN npassword;
+END$$
+DELIMITER ;
+
+SELECT department_id, generate_password(department_id) AS password
+FROM employees;
