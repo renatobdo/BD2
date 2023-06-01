@@ -161,3 +161,53 @@ CALL realizar_transferencia('123456', '654321', 100.00, @mensagem);
 SELECT @mensagem AS status_transferencia;
 select * from contas;
 
+DELIMITER $$
+CREATE FUNCTION dias_entre_datas(data_inicial DATE, data_final DATE)
+RETURNS INT
+BEGIN
+    DECLARE numero_dias INT;
+    SET numero_dias = DATEDIFF(data_final, data_inicial);
+    RETURN numero_dias;
+END$$
+DELIMITER ;
+
+
+drop table pacientes_cancer;
+CREATE TABLE pacientes_cancer (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    data_diagnostico DATE NOT NULL,
+    data_de_alta DATE,
+    status VARCHAR(20),
+    tipo_cancer ENUM('leucemia linfoblástica B', 'linfoma não Hodgkin de células B', 'mieloma múltiplo') NOT NULL
+);
+
+INSERT INTO pacientes_cancer (nome, data_diagnostico, data_de_alta, status, tipo_cancer)
+VALUES
+    ('Sérgio Ramos', '2018-01-01', '2023-05-28', '', 'leucemia linfoblástica B'),
+    ('Paulo Peregrinho', '2018-06-15', '2023-05-28', '', 'linfoma não Hodgkin de células B'),
+    ('Mario Alves', '2020-03-10', '2023-05-28', '', 'mieloma múltiplo');
+insert into pacientes_cancer (nome, data_diagnostico, data_de_alta, status, tipo_cancer)
+VALUES  ('Mariano de Souza', '2015-03-10', '2018-05-28', '', 'mieloma múltiplo');
+
+DELIMITER $$
+CREATE FUNCTION verificar_cura(data_de_alta DATE) RETURNS VARCHAR(20)
+BEGIN
+    DECLARE cura_status VARCHAR(20);
+    DECLARE data_verificacao DATE;
+
+    SET data_verificacao = DATE_ADD(data_de_alta, INTERVAL 5 YEAR);
+
+    IF (data_verificacao <= CURDATE()) THEN
+        SET cura_status = 'cura';
+    ELSE
+        SET cura_status = 'remissão';
+    END IF;
+
+    RETURN cura_status;
+END$$
+DELIMITER ;
+
+SELECT nome, data_de_alta, "como eu chamo a função verificar_cura sem erros?" AS status_cura
+FROM pacientes_cancer;
+
