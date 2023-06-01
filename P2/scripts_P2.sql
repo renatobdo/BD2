@@ -100,3 +100,64 @@ DELIMITER ;
 
 SELECT department_id, generate_password(department_id) AS password
 FROM employees;
+
+select * from countries;
+
+CREATE TABLE contas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    numero_conta VARCHAR(10) NOT NULL,
+    saldo DECIMAL(10, 2) NOT NULL
+);
+
+INSERT INTO contas (numero_conta, saldo) VALUES
+    ('123456', 1000.00),
+    ('654321', 500.00),
+    ('987654', 2000.00),
+    ('456789', 1500.00),
+    ('321654', 800.00);
+
+SELECT * FROM contas;
+DELIMITER $$
+CREATE PROCEDURE realizar_transferencia(
+    IN conta_origem VARCHAR(10),
+    IN conta_destino VARCHAR(10),
+    IN valor_transferencia DECIMAL(10, 2),
+    OUT mensagem VARCHAR(100)
+)
+BEGIN
+    DECLARE saldo_origem DECIMAL(10, 2);
+    DECLARE count_destino INT;
+
+    START TRANSACTION;
+
+    -- Verifica se a conta de origem tem saldo suficiente
+    SELECT saldo INTO saldo_origem FROM contas WHERE numero_conta = conta_origem;
+
+    IF saldo_origem >= valor_transferencia THEN
+        -- Atualiza o saldo da conta de origem
+        UPDATE contas SET saldo = saldo - valor_transferencia WHERE numero_conta = conta_origem;
+
+        -- Verifica se a conta de destino existe
+        SELECT COUNT(*) INTO count_destino FROM contas WHERE numero_conta = conta_destino;
+
+        IF count_destino > 0 THEN
+            -- Atualiza o saldo da conta de destino
+            UPDATE contas SET saldo = saldo + valor_transferencia WHERE numero_conta = conta_destino;
+            SET mensagem = 'Transferência realizada com sucesso';
+            COMMIT;
+        ELSE
+            -- Rollback da transação em caso de erro (conta de destino não encontrada)
+            ROLLBACK;
+            SET mensagem = 'Erro: Conta de destino não encontrada';
+        END IF;
+    ELSE
+        -- Rollback da transação em caso de erro (saldo insuficiente)
+        ROLLBACK;
+        SET mensagem = 'Erro: Saldo insuficiente na conta de origem';
+    END IF;
+END$$
+DELIMITER ;
+CALL realizar_transferencia('123456', '654321', 100.00, @mensagem);
+SELECT @mensagem AS status_transferencia;
+select * from contas;
+
